@@ -37,7 +37,11 @@ app.use(async (req, res, next) => {
     await connectDB();
     next();
   } catch (error) {
-    res.status(500).json({ message: 'Database Connection Error' });
+    res.status(500).json({ 
+      message: 'Database Connection Error', 
+      error: error.message,
+      uriExists: !!process.env.MONGO_URI 
+    });
   }
 });
 
